@@ -1,0 +1,44 @@
+<div class="container">
+
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+            <label>Titre Chanson en tapant</label>
+            <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control">
+        </div>
+    </form>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Id</th>
+                        <th>Titre</th>
+                        <th>Artiste</th>
+                        <th>Durée (min)</th>
+                        <th>Date de création</th>
+                        <th>Genre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @for (chanson of chansons | searchFilter: searchTerm ; track chanson.idChanson ; let index = $index) {
+                    <tr>
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ chanson.idChanson }}</td>
+                        <td>{{ chanson.titre }}</td>
+              <td>{{ chanson.artiste }}</td>
+                        <td>{{ chanson.duree }}</td>
+                        <td>{{ chanson.dateCreation | date:'dd/MM/yyyy' }}</td>
+                        <td>{{chanson.genre.nomGenre}}</td>
+                       @if (authService.isAdmin()) {
+                        <td><a class="btn btn-danger" (click)="supprimerChanson(chanson)">Supprimer</a></td>
+                         <td><a class="btn btn-success" [routerLink]="['/updateChanson',chanson.idChanson]">Modifier</a></td>
+                        }
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+    <div>
+        <h2>Modifier une Chanson :</h2>
+    </div>
+    <form>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID Chanson</label>
+            <input readonly type="text" [(ngModel)]="currentChanson.idChanson" name="idChanson"
+                class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Titre Chanson</label>
+            <input type="text" [(ngModel)]="currentChanson.titre" name="titre" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Artiste</label>
+            <input type="text" [(ngModel)]="currentChanson.artiste" name="artiste" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Durée (min)</label>
+            <input type="number" [(ngModel)]="currentChanson.duree" name="duree"
+                class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Date de création</label>
+            <input type="date" [ngModel]="currentChanson.dateCreation | date: 'yyyy-MM-dd'"
+    (ngModelChange)="currentChanson.dateCreation = $event" name="dateCreation" class="form-control">        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Genre</label>
+            <select class="form-control" id="idForm" name="idForm" [(ngModel)]="updateFormId">
+                @for(form of genre; track form.idGenre)
+                {
+                <option [value]="form.idGenre"> {{form.nomGenre}} </option>
+                }
+            </select>
+        </div>
+        <div class="mt-2">
+            <button type="submit" (click)="updateChanson()" class="btn btn-success">Modifier</button>
+        </div>
+    </form>
+</div>
